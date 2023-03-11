@@ -34,6 +34,14 @@ public class GanzZahl00LinkLis {
         Node tmp;
 
         //TODO:Füge neue Ziffer am Anfang der Zahl hinzu.
+        tmp = new Node(element, head, null);
+        if (head != null) {
+            head.prev = tmp;
+        }
+        head = tmp;
+        if(tail == null) {
+            tail = tmp;
+        }
 
         System.out.println("hinzufügen: "+element);
     }
@@ -42,6 +50,14 @@ public class GanzZahl00LinkLis {
         Node tmp;
 
         //TODO:Füge neue Ziffer am Ende der Zahl hinzu.
+        tmp = new Node(element, null, tail);
+        if (tail != null) {
+            tail.next = tmp;
+        }
+        tail = tmp;
+        if(head == null) {
+            head = tmp;
+        }
 
         System.out.println("hinzufügen: "+element);
     }
@@ -51,6 +67,11 @@ public class GanzZahl00LinkLis {
         Node tmp;
 
         //TODO:Gebe alle Ziffern von vorne nach hinten aus.
+        tmp = head;
+        while (tmp != null) {
+            System.out.println(tmp.element);
+            tmp = tmp.next;
+        }
 
     }
 
@@ -59,14 +80,32 @@ public class GanzZahl00LinkLis {
         Node tmp;
 
         //TODO:Gebe alle Ziffern von hinten nach vorne aus.
+        tmp = tail;
+        while (tmp != null) {
+            System.out.println(tmp.element);
+            tmp = tmp.prev;
+        }
 
     }
 
     public byte removeFirst() {
         Node tmp;
-        tmp=new Node((byte)127,null,null);
+        // ??? --> tmp=new Node((byte)127,null,null);
 
         //TODO:Lösche erste Ziffer.
+        if (head == null) {
+            System.err.println("Leer");
+            System.exit(-1);
+        }
+        tmp = head;
+        head = head.next;
+        if (head != null) {
+            head.prev = null;
+        }
+        if (tmp == tail) {
+            tail = null;
+        }
+
 
         System.out.println("gelöscht: "+tmp.element);
         return tmp.element;
@@ -74,9 +113,22 @@ public class GanzZahl00LinkLis {
 
     public byte removeLast() {
         Node tmp;
-        tmp=new Node((byte)127,null,null);
+        // ??? --> tmp=new Node((byte)127,null,null);
 
         //TODO:Lösche erste Ziffer.
+        if (tail == null) {
+            System.err.println("Leer");
+            System.exit(-1);
+        }
+        tmp = tail;
+        tail = tail.prev;
+        if (tail != null) {
+            tail.next = null;
+        }
+
+        if (tmp == head) {
+            head = null;
+        }
 
         System.out.println("gelöscht: "+tmp.element);
         return tmp.element;
